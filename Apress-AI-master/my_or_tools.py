@@ -25,8 +25,6 @@ def pairs(tuple, accum=[]):
     accum.extend((tuple[0],e) for e in tuple[1:])
     return pairs(tuple[1:],accum)
 
-from my_or_tools import ObjVal, SolVal, newSolver
-
 def k_out_of_n(solver,k,x,rel='=='):
   n = len(x)
   binary = sum(x[i].Lb()==0 for i in range(n)) == n and \
@@ -63,7 +61,6 @@ def sosn(solver,k,x,rel='<='):
     l = k_out_of_n(solver,k,x,rel) 
     return l if k <= 1 else [l,sosnrecur(solver,k-1,l)]
 
-from ortools.linear_solver import pywraplp  
 def bounds_on_box(a,x,b):
   Bounds,n = [None,None],len(a)
   s = pywraplp.Solver('Box',pywraplp.Solver.GLOP_LINEAR_PROGRAMMING)
